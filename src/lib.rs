@@ -33,6 +33,7 @@ impl<'p> Plot<'p> {
 
     pub fn show(&self) {
         let _ = self.plt.call(self.py, "show", PyTuple::empty(self.py), None).unwrap();
+        let _ = self.plt.call(self.py, "pause", (0.1,), None).unwrap();
     }
 
     pub fn scatter(&self, x: &[f32], y: &[f32]) {
@@ -56,8 +57,13 @@ impl<'p> Plot<'p> {
         let _ = self.plt.call(self.py, "grid", (grid,), None).unwrap();
     }
 
+    pub fn pause(&self, seconds: f32) {
+        let _ = self.plt.call(self.py, "pause", (seconds,), None).unwrap();
+    }
+
     pub fn draw(&self) {
         let _ = self.plt.call(self.py, "draw", PyTuple::empty(self.py), None).unwrap();
+        let _ = self.plt.call(self.py, "pause", (0.1,), None).unwrap();
     }
 
     /// Clear figure
